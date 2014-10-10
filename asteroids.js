@@ -66,7 +66,7 @@ var updateGrid = function(x, y, radius, index)
 	}
 };
 
-/*
+
 Grid:prototype = 
 {
 	
@@ -91,7 +91,7 @@ Grid:prototype =
 	
 	
 	
-};*/
+};
 
 // RESOURCES
 // ----------------------------------
@@ -101,6 +101,12 @@ Resource.img.background = new Image();
 Resource.img.background.src = "outer_space.jpg";
 Resource.sfx.collide = new Audio();
 Resource.sfx.collide.src = "collide.wav";
+//
+image = document.createElement("img");
+image.src = "ship.png";
+image.style.top = HEIGHT/2;
+image.style.right = WIDTH/2;
+document.body.appendChild(image);
 
 // ASTEROID
 //---------------------------
@@ -203,6 +209,7 @@ Asteroids.prototype = {
 		this.backBufferContext.fillStyle = "#000";
 		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 		this.backBufferContext.drawImage(Resource.img.background, 0, 0);
+		this.backBufferContext.drawImage(
 		
 		// Render asteroids
 		this.asteroids.forEach( function(asteroid) {
