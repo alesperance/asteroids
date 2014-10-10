@@ -52,7 +52,7 @@ var updateGrid = function(x, y, radius, index)
 {
 	centerX = Math.floor(x/GRIDSIZE);
 	centerY = Math.floor(y/GRIDSIZE);
-	if (centerX >= 0 && centerX <= granularity.x && centerY >= 0 && centerY <= granularity.y(
+	if (centerX >= 0 && centerX <= granularity.x && centerY >= 0 && centerY <= granularity.y)
 	{
 		
 	}
@@ -60,11 +60,11 @@ var updateGrid = function(x, y, radius, index)
 	
 	northX = Math.floor(x/GRIDSIZE);
 	northY = Math.floor((y-radius)/GRIDSIZE);
-	if (centerX >= 0 && centerX <= granularity.x && centerY >= 0 && centerY <= granularity.y(
+	if (centerX >= 0 && centerX <= granularity.x && centerY >= 0 && centerY <= granularity.y)
 	{
 		
 	}
-}
+};
 
 /*
 Grid:prototype = 
