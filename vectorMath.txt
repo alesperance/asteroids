@@ -1,0 +1,34 @@
+Vector Math Library
+	object
+	return new
+	instance method
+	
+	x, y				//2 floats
+	magnitude, angle	//2 floats	
+	x, y, magnitude		//3 floats
+	
+	
+var Vector(x, y)
+{
+	this.x = x;
+	this.y = y;
+}
+
+Vector ZERO = new Vector(0,0)
+Vector.Prototype.add(OtherVec)
+{
+	return new Vector(this.x + otherVec.x,
+					  this.y + otherVec.y);
+}
+
+Vector.Prototype.scale = function(scalar)
+{
+	return new Vector(this.x*scalar, this.y*scalar);
+}
+
+A (dot) B = (Xa * Xb) + (Ya * Yb)
+
+|A|*|B| cos(theta)
+
+ 
+		

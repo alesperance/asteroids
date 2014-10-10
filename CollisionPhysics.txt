@@ -1,0 +1,31 @@
+Physics of collisions
+
+Classical "Newtonian" Physics
+Rigid Body Dynamics
+Linear Dynamics
+	-motion of an object in a linear fashion
+Rotational Dynamics
+	-motion of an object on how it rotates
+Idealized Point Mass
+
+Energy
+	K = kinetic energy (energy from motion relative to the frame of reference)
+		K = 1/2mv^2
+	U = potential energy (Derived from position and force/force field)
+		Ugravity = mgh
+		Ugravity = (-GMm)/r where G = gravitational constant = 6.6738*10^-11 m/kg*s^2
+		Uspring = 1/2kd where k = spring constant and d = displacement
+		
+Inside our system:
+	Energy = K1 + K2 = 1/2m1v1^2 + 1/2m2v2^2 = 1/2m1v1'^2 + 1/2m2v2'^2
+	Momentum: P = mv;  P1 + P2 = m1v1 + m2v2 = m1v1' + m2v2' (vectors)
+	
+	Epsilon	= coefficient of restitution [0,1]  (multiply equation by epsilon)
+	
+	
+Angular Dynamics
+	T = RxF (r cross f)
+	Omega = I(alpha)(deltaT)
+	F = ma (acc.is vector)
+	
+For now, we're concerned about calculating the velocity.  We can use a constant for rotational energy

@@ -1,0 +1,28 @@
+GameObjects
+	id: integer
+	pos: (int, int)
+	gridCells: list<int>
+	static list<cell>
+
+SDS (Spatial Data Structure)
+	Grid
+	Octtree
+	Binary Tree
+	Axis Lists
+
+Grid
+	granularity: int
+	width: int
+	height: int
+	cells: list<int>[width, height]
+	add(id)
+	remove(id)
+	move(id)
+	objects: dict<id, cell>
+	colliding(): list
+	
+	
+	
+xIndex = Math.floor(x/grenularity)
+yIndex = Math.floor(y/grenularity)
+
