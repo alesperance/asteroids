@@ -1,8 +1,11 @@
 // Screen Size
 var WIDTH = 800;
 var HEIGHT = 480;
-var GRIDSIZE = 16;
+var GRIDSIZE = 40;
 granularity = {"x": [WIDTH/GRIDSIZE], "y": [HEIGHT/GRIDSIZE]};
+var row = 12;
+var column = 20;
+var grid = [];
 
 var MathHelper = {
 	clamp: function(value, min, max){
@@ -21,8 +24,12 @@ var Grid = function()
 	//gridArray = [GRIDSIZE];
 	//for(var i = 0; i < GRIDSIZE; i++)
 	//	gridArray[i] = new Array(GRIDSIZE);
-	rows = granularity.x;
-	columns = granularity.y;
+	//rows = granularity.x;
+	//columns = granularity.y;
+	this.rows = 12;
+	this.columns = 20;
+	this.rowSpace = HEIGHT/this.rows;
+	this.columnSpace = WIDTH/this.columns;
 };
 
 Grid:prototype = 
@@ -68,7 +75,7 @@ var Asteroid = function(velocity, angle, mass) {
 	if(mass !== undefined) this.radius = mass;
 	this.x = Math.random() * WIDTH;
 	this.y = Math.random() * HEIGHT;
-	grid = new Grid();
+	//grid = new Grid();
 };
 
 Asteroid.prototype = {
@@ -87,6 +94,7 @@ Asteroid.prototype = {
 		context.fill();
 		context.stroke();
 		context.restore();
+
 	},
 	
 	update: function(elapsedTime) {
@@ -110,27 +118,29 @@ var Asteroids = function (canvasId) {
   // Rendering variables
 	this.frontBuffer = document.getElementById(canvasId);
 	this.frontBufferContext = this.frontBuffer.getContext('2d');
-  this.backBuffer = document.createElement('canvas');
+	this.backBuffer = document.createElement('canvas');
 	this.backBuffer.width = this.frontBuffer.width;
 	this.backBuffer.height = this.frontBuffer.height;
-  this.backBufferContext = this.backBuffer.getContext('2d');
+	this.backBufferContext = this.backBuffer.getContext('2d');
+	///////////////////////////////////////////////////////////////////
+	this.Grid = new Grid();
   
   // Game variables
-  this.asteroids = [];
-  this.level = 1;
-  this.gameOver = false;
+	this.asteroids = [];
+	this.level = 1;
+	this.gameOver = false;
 	
   // Timing variables
-  this.startTime = 0;
-  this.lastTime = 0;
-  this.gameTime = 0;
-  this.fps = 0;
-  this.STARTING_FPS = 60;
+	this.startTime = 0;
+	this.lastTime = 0;
+	this.gameTime = 0;
+	this.fps = 0;
+	this.STARTING_FPS = 60;
 
    // Pausing variables
-  this.paused = false;
-  this.startedPauseAt = 0;
-  this.PAUSE_TIMEOUT = 100;
+	this.paused = false;
+	this.startedPauseAt = 0;
+	this.PAUSE_TIMEOUT = 100;
   
   window.addEventListener("blur", function( event) {
     myself.paused = true;
@@ -164,6 +174,8 @@ Asteroids.prototype = {
 			asteroid.render(self.backBufferContext);
 		});
 		
+		this.renderGrid('white');
+		
 		// Render GUI
 		if(this.gameOver)
 		{
@@ -182,8 +194,34 @@ Asteroids.prototype = {
 		this.frontBufferContext.drawImage(this.backBuffer, 0, 0);
 		
 		
+	},
+	
+	
+	
+	//show grid lines to help visualize spatial data structure
+	renderGrid: function(stroke)
+	{
+		this.backBufferContext.save();
+		this.backBufferContext.lineWidth = 0.5;
+		this.backBufferContext.strokeStyle = stroke;
 		
+		for(i = 1; i < this.Grid.rows; i++)
+		{
+			this.backBufferContext.beginPath();
+			this.backBufferContext.moveTo(0, i * this.Grid.rowSpace);
+			this.backBufferContext.lineTo(WIDTH, i * this.Grid.rowSpace);
+			this.backBufferContext.stroke();
+		}
 		
+		for(i = 1; i < this.Grid.columns; i++)
+		{
+			this.backBufferContext.beginPath();
+			this.backBufferContext.moveTo(i * this.Grid.columnSpace, 0);
+			this.backBufferContext.lineTo(i * this.Grid.columnSpace, HEIGHT);
+			this.backBufferContext.stroke();
+		}
+		
+		this.backBufferContext.restore();
 	},
 	
 	
