@@ -1,7 +1,7 @@
 // Screen Size
 var WIDTH = 800;
 var HEIGHT = 480;
-var GRIDSIZE = 5;
+var GRIDSIZE = 16;
 granularity = {"x": [WIDTH/GRIDSIZE], "y": [HEIGHT/GRIDSIZE]};
 
 var MathHelper = {
@@ -18,9 +18,11 @@ var MathHelper = {
 var Grid = function()
 {
 	var myself = this;
-	gridArray = [GRIDSIZE];
-	for(var i = 0; i < GRIDSIZE; i++)
-		gridArray[i] = new Array(GRIDSIZE);
+	//gridArray = [GRIDSIZE];
+	//for(var i = 0; i < GRIDSIZE; i++)
+	//	gridArray[i] = new Array(GRIDSIZE);
+	rows = granularity.x;
+	columns = granularity.y;
 };
 
 Grid:prototype = 
@@ -178,6 +180,10 @@ Asteroids.prototype = {
 			this.renderGuiText("Level " + this.level, 380, 220);
 		}
 		this.frontBufferContext.drawImage(this.backBuffer, 0, 0);
+		
+		
+		
+		
 	},
 	
 	
