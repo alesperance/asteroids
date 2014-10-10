@@ -2,7 +2,7 @@
 var WIDTH = 800;
 var HEIGHT = 480;
 var GRIDSIZE = 40;
-granularity = {"x": [WIDTH/GRIDSIZE], "y": [HEIGHT/GRIDSIZE]};
+granularity = {"x": [Math.floor(WIDTH/GRIDSIZE)], "y": [Math.floor(HEIGHT/GRIDSIZE)]};
 var row = 12;
 var column = 20;
 var grid = [];
@@ -21,15 +21,30 @@ var MathHelper = {
 var Grid = function()
 {
 	var myself = this;
-	//gridArray = [GRIDSIZE];
-	//for(var i = 0; i < GRIDSIZE; i++)
-	//	gridArray[i] = new Array(GRIDSIZE);
-	//rows = granularity.x;
-	//columns = granularity.y;
 	this.rows = 12;
 	this.columns = 20;
 	this.rowSpace = HEIGHT/this.rows;
 	this.columnSpace = WIDTH/this.columns;
+};
+
+
+
+var gridArray = function()
+{
+	self = this;
+	self.rows = granularity.x;
+	self.columns = granularity.y;
+	//gotta love js arrays!
+	arr = new Array(self.rows);
+	for(i = 0; i < self.columns; i++)
+	{
+		arr[i] = new Array(self.rows);
+		for(j = 0; j < self.rows; j++)
+		{
+			arr[i][j] = new Array(0);
+		}
+	}
+	return arr;
 };
 
 Grid:prototype = 
@@ -75,7 +90,6 @@ var Asteroid = function(velocity, angle, mass) {
 	if(mass !== undefined) this.radius = mass;
 	this.x = Math.random() * WIDTH;
 	this.y = Math.random() * HEIGHT;
-	//grid = new Grid();
 };
 
 Asteroid.prototype = {
@@ -122,7 +136,8 @@ var Asteroids = function (canvasId) {
 	this.backBuffer.width = this.frontBuffer.width;
 	this.backBuffer.height = this.frontBuffer.height;
 	this.backBufferContext = this.backBuffer.getContext('2d');
-	///////////////////////////////////////////////////////////////////
+	
+	
 	this.Grid = new Grid();
   
   // Game variables
@@ -174,6 +189,7 @@ Asteroids.prototype = {
 			asteroid.render(self.backBufferContext);
 		});
 		
+		//calls render grid so we can see our spatial background
 		this.renderGrid('white');
 		
 		// Render GUI
